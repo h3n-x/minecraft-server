@@ -1,0 +1,19 @@
+# =============================================================================
+# KOMOREBI SMP — copia de seguridad programada
+# Managed by KOMOREBI SMP installer v@@INSTALLER_VERSION@@
+#
+# Se ejecuta como root porque debe detener y reiniciar el servidor de forma
+# controlada. La lógica está en @@BIN_DIR@@/backup-komorebi.sh.
+# =============================================================================
+[Unit]
+Description=KOMOREBI SMP - copia de seguridad diaria
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=@@BIN_DIR@@/backup-komorebi.sh --scheduled
+TimeoutStartSec=2h
+Nice=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=read-only

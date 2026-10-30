@@ -1,0 +1,29 @@
+#Minecraft server properties
+# =============================================================================
+#  KOMOREBI SMP — valores que gestiona el instalador (Paper 1.20.1).
+#  Es un ejemplo de referencia: el instalador conserva el resto de claves que
+#  Paper añade en el primer arranque. Sin secretos.
+#
+#  El MOTD usa escapes \uXXXX (formato con el que el servidor guarda el
+#  fichero): \u00A7 = §  y  \u6728\u6F0F\u308C\u65E5 = 木漏れ日
+#  Se muestra como:  §d木漏れ日 §f| §aKOMOREBI SMP
+#
+#  Puerto, jugadores y distancias se ajustan en /etc/komorebi/komorebi.conf
+#  (SERVER_PORT, MAX_PLAYERS, VIEW_DISTANCE, SIMULATION_DISTANCE).
+# =============================================================================
+motd=\u00A7d\u6728\u6F0F\u308C\u65E5 \u00A7f| \u00A7aKOMOREBI SMP
+server-port=25565
+online-mode=true
+white-list=true
+enforce-whitelist=true
+max-players=10
+view-distance=7
+simulation-distance=5
+spawn-protection=16
+difficulty=normal
+gamemode=survival
+pvp=true
+allow-flight=false
+enable-command-block=false
+enable-rcon=false
+enable-query=false

@@ -1,0 +1,10 @@
+{
+  "description": "A guided Arch Linux setup tool for KOMOREBI SMP administrators to install and manage a secure, optimized Paper Minecraft server with systemd and backups.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

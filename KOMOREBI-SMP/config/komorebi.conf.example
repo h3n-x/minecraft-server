@@ -1,0 +1,69 @@
+# =============================================================================
+#  /etc/komorebi/komorebi.conf — Configuración de KOMOREBI SMP (木漏れ日)
+#  Generado por el instalador v@@INSTALLER_VERSION@@ el @@GENERATED@@.
+#
+#  Formato: CLAVE=valor, una por línea, sin espacios alrededor de "=".
+#  Los valores con espacios van entre comillas. No hay comentarios al final de
+#  línea. NO es un script: se lee con un analizador que solo acepta las claves
+#  conocidas. Debe pertenecer a root y no ser escribible por otros.
+#
+#  Tras cambiar memoria, Java, rutas o el puerto, regenera las unidades:
+#    sudo bash installer/install-komorebi.sh --service
+#  y reinicia el servidor: sudo systemctl restart komorebi
+# =============================================================================
+
+# --- Versiones (no cambiar sin comprobar compatibilidad de plugins) ---------
+MC_VERSION=@@MC_VERSION@@
+# Número de build fijado (196 = última de 1.20.1 y primera con Java 21) o
+# "latest-stable" (no recomendado en producción).
+PAPER_BUILD=@@PAPER_BUILD@@
+# SHA-256 esperado de la build fijada (se compara con la API y la descarga).
+PAPER_SHA256=@@PAPER_SHA256@@
+
+# --- Java -------------------------------------------------------------------
+JAVA_BIN=@@JAVA_BIN@@
+# Memoria de la JVM. Calculada según la RAM detectada al instalar.
+# Paper recomienda Xms = Xmx; tras las pruebas puedes subir JVM_XMS al valor de JVM_XMX.
+JVM_XMS=@@JVM_XMS@@
+JVM_XMX=@@JVM_XMX@@
+# Flags recomendados por la API oficial de Paper para 1.20.1 (Aikar).
+JVM_FLAGS="@@JVM_FLAGS@@"
+
+# --- Usuario y rutas (no cambiar tras la instalación) ------------------------
+MC_USER=@@MC_USER@@
+MC_GROUP=@@MC_GROUP@@
+MC_DIR=@@MC_DIR@@
+BACKUP_DIR=@@BACKUP_DIR@@
+LOG_DIR=@@LOG_DIR@@
+SERVICE_NAME=@@SERVICE_NAME@@
+CONSOLE_FIFO=@@CONSOLE_FIFO@@
+
+# --- Servidor (se aplican a server.properties con --paper) -------------------
+SERVER_PORT=@@SERVER_PORT@@
+MAX_PLAYERS=@@MAX_PLAYERS@@
+VIEW_DISTANCE=@@VIEW_DISTANCE@@
+SIMULATION_DISTANCE=@@SIMULATION_DISTANCE@@
+# Segundos que systemd espera a que Paper guarde y se cierre.
+STOP_TIMEOUT=@@STOP_TIMEOUT@@
+
+# --- Copias de seguridad -----------------------------------------------------
+# stop = parada controlada (consistente, recomendado) · hot = experimental
+BACKUP_MODE=@@BACKUP_MODE@@
+# zstd (rápido) o gzip
+BACKUP_COMPRESSION=@@BACKUP_COMPRESSION@@
+# Copias a conservar por tipo (0 = sin límite)
+BACKUP_KEEP_DAILY=@@BACKUP_KEEP_DAILY@@
+BACKUP_KEEP_WEEKLY=@@BACKUP_KEEP_WEEKLY@@
+BACKUP_KEEP_MANUAL=@@BACKUP_KEEP_MANUAL@@
+# Día ISO en que la copia diaria se promueve a semanal (1 = lunes … 7 = domingo)
+BACKUP_WEEKLY_DAY=@@BACKUP_WEEKLY_DAY@@
+# Programación del temporizador (sintaxis OnCalendar de systemd)
+BACKUP_ONCALENDAR="@@BACKUP_ONCALENDAR@@"
+# Segundos de aviso a los jugadores antes de parar para la copia (0 = sin aviso)
+BACKUP_STOP_WARNING=@@BACKUP_STOP_WARNING@@
+# El healthcheck avisa si la última copia tiene más horas que esto
+BACKUP_MAX_AGE_HOURS=@@BACKUP_MAX_AGE_HOURS@@
+
+# --- Red ----------------------------------------------------------------------
+# Contacto (correo o URL) para el User-Agent que exige PaperMC en su API.
+HTTP_CONTACT="@@HTTP_CONTACT@@"

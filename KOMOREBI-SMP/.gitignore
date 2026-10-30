@@ -1,0 +1,6 @@
+# La raíz del repositorio ignora "logs/"; aquí se conservan las carpetas vacías.
+!logs/
+logs/*
+!logs/.gitkeep
+backups/*
+!backups/.gitkeep

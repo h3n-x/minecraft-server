@@ -1,0 +1,34 @@
+# =============================================================================
+#  Manifiesto de plugins — KOMOREBI SMP · Paper 1.20.1 · Java 21
+#  Se instala en /etc/komorebi/plugins-manifest.conf (root:root 0644).
+#
+#  Formato: 13 campos separados por "|" (sin espacios alrededor):
+#  estado|activo|nombre|version|fichero|patrones|url|algoritmo|hash|licencia|requiere|pagina|notas
+#
+#    estado    confirmed = compatibilidad con 1.20.1 verificada
+#              optional  = compatible, pero no forma parte de la base inicial
+#              pending   = sin verificar: NUNCA se descarga automáticamente
+#    activo    yes|no (solo se instalan confirmed/optional con activo=yes)
+#    patrones  globs, separados por comas, para detectar otras versiones ya
+#              presentes en plugins/ (no se instalan duplicados)
+#    url       solo HTTPS de cdn.modrinth.com o github.com
+#    algoritmo sha512|sha256 — el hash es obligatorio y se verifica
+#    requiere  nombres de este manifiesto, separados por comas
+#
+#  Verificado el 2026-10-30 contra la API de Modrinth (SHA-512 publicados por
+#  Modrinth). Vault: release oficial de GitHub sin checksum publicado; hash
+#  calculado sobre el asset oficial ese mismo día (ver INVESTIGACION.md).
+#  No uses versiones "latest": antes de cambiar una versión comprueba su
+#  compatibilidad con 1.20.1 y actualiza URL y hash.
+# =============================================================================
+confirmed|yes|LuckPerms|5.5.71|LuckPerms-Bukkit-5.5.71.jar|LuckPerms-Bukkit-*.jar,LuckPerms.jar|https://cdn.modrinth.com/data/Vebnzrzj/versions/b0mk8uS6/LuckPerms-Bukkit-5.5.71.jar|sha512|188a91f0a543d23bfda32385fca6db63d61e49c8a422bd452a260bd9cbc6a7d7fe45071199e9fca8f3ce43c2b41ee84fd315bd15464577028ff3951a7d4fab27|MIT||https://luckperms.net/|Rangos y permisos (kohai, sakura, kitsune, yoru, moderator, admin, owner).
+confirmed|yes|EssentialsX|2.20.1|EssentialsX-2.20.1.jar|EssentialsX-*.jar,Essentials.jar|https://cdn.modrinth.com/data/hXiIvTyT/versions/puUfqBpY/EssentialsX-2.20.1.jar|sha512|d6453063b8197b96c5f244f5b23bd97abf75c9bd60206e1f9e40ae4bb6e93d0141a3b253dce588a6335a43f8c2c37f02d14563587668edbff0d60daac80b42ca|GPL-3.0||https://essentialsx.net/|Comandos básicos y economía integrada (Yen ¥). Última versión que declara 1.20.1.
+confirmed|yes|EssentialsXSpawn|2.20.1|EssentialsXSpawn-2.20.1.jar|EssentialsXSpawn-*.jar|https://cdn.modrinth.com/data/hXiIvTyT/versions/puUfqBpY/EssentialsXSpawn-2.20.1.jar|sha512|ad12d4b00189a077da9b6b95d0e3f565cf9fba4e5404a2011beccb187816d749093d868b14134f8682082847273d732ae869852f28100b90a8cc21175afef674|GPL-3.0|EssentialsX|https://essentialsx.net/|Módulo necesario para /spawn y /setspawn (Sakura no Machi).
+confirmed|yes|Vault|1.7.3|Vault-1.7.3.jar|Vault.jar,Vault-*.jar|https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar|sha512|aa02af3c9770249bda77b91058ce97240d4fd4cba3f07918534127acace297feb05445122b499c2623123dfde49670e9a763221e0f41ef03f51e6880ea8f6647|LGPL-3.0||https://github.com/MilkBowl/Vault|API puente de economía y permisos. Hash fijado por el proyecto (GitHub no publica checksum).
+confirmed|yes|CoreProtect|22.4|CoreProtect-22.4.jar|CoreProtect-*.jar,CoreProtect.jar|https://cdn.modrinth.com/data/Lu3KuzdV/versions/llmrc4cl/CoreProtect-22.4.jar|sha512|0874f449965ec28a1ec1453a4aafc6da80e1647ec46b87559540d57047603f6b07f83d69b602f049475756e38f9148dbd964f668341cbb30b7ebd09345c97aad|Artistic-2.0||https://modrinth.com/plugin/coreprotect|Registro y rollback (SQLite). Rama contemporánea de 1.20.x.
+confirmed|yes|GriefPrevention|16.18.3|GriefPrevention-16.18.3.jar|GriefPrevention.jar,GriefPrevention-*.jar|https://cdn.modrinth.com/data/O4o4mKaq/versions/RQv9pNC6/GriefPrevention.jar|sha512|25173c1d793999fce520fe3ae9fe3777167dece9e79985908d3fd39c8193603f818d0ab7117908c6a8587eee71c41a9072290f46513aa0512754e2740f73dc2e|GPL-3.0||https://www.griefprevention.com/|Claims de jugadores (1.19–1.20.6).
+confirmed|yes|WorldEdit|7.2.15|worldedit-bukkit-7.2.15.jar|worldedit-bukkit-*.jar,WorldEdit.jar,WorldEdit-*.jar|https://cdn.modrinth.com/data/1u6JkXh5/versions/XL2dgNKo/worldedit-bukkit-7.2.15.jar|sha512|e94ccdf8ea59c2a87d00648b7d182f95206aaf08395fd63fa8fe2017d63c0122ce3466f017612059c6f26d896e3c6d8b5d8687d5f139bbc21564c63f3873c0d9|GPL-3.0||https://enginehub.org/worldedit/|Construcción administrativa. Changelog oficial: Bukkit 1.16.5–1.20.1.
+confirmed|yes|WorldGuard|7.0.9|worldguard-bukkit-7.0.9-dist.jar|worldguard-bukkit-*.jar,WorldGuard.jar,WorldGuard-*.jar|https://cdn.modrinth.com/data/DKY9btbd/versions/NpagB1YQ/worldguard-bukkit-7.0.9-dist.jar|sha512|a16715f02d3e1a021c6263fc53cf6c5acee93c1509d42ace0b9681fb4b2010729547fa3da0e051be9a26332b6fcd8469a7fb64274a9c02e177356d4779c6ac62|LGPL-3.0|WorldEdit|https://enginehub.org/worldguard/|Regiones administrativas (spawn, mercado, Yoru). Changelog oficial: 1.20–1.20.4.
+optional|no|PlaceholderAPI|2.11.6|PlaceholderAPI-2.11.6.jar|PlaceholderAPI-*.jar,PlaceholderAPI.jar|https://cdn.modrinth.com/data/lKEzGugV/versions/vkuwyUC6/PlaceholderAPI-2.11.6.jar|sha512|4402d7ec8045d6634fe19e162bc490ae5a010f6e700efb9c709427451130334066f84948f2cf8086e0accfe6961288231412575142bc8ca15a14e91430a907fe|GPL-3.0||https://github.com/PlaceholderAPI/PlaceholderAPI|Variables para menús y tablist (Etapa 2). Compatible; activar con activo=yes.
+optional|no|EssentialsXChat|2.20.1|EssentialsXChat-2.20.1.jar|EssentialsXChat-*.jar|https://cdn.modrinth.com/data/hXiIvTyT/versions/puUfqBpY/EssentialsXChat-2.20.1.jar|sha512|ca64e1c7833fc01a91241ad4bab8213252047469dd01d330606b2198d5d9a6a083cc2c00489c42c3e4ff14472ec9a45a5a8d9e84d7240e9eb18d3fe10af3e3c4|GPL-3.0|EssentialsX|https://essentialsx.net/|Formato de chat con prefijos de rango. Compatible; activar con activo=yes.
+pending|no|spark|-||||||GPL-3.0||https://spark.lucko.me/download|Solo se distribuye para Bukkit en el CI oficial (ci.lucko.me) sin checksum ni declaración por build para 1.20.1. Descárgalo manualmente, verifica y añade url/hash para activarlo.

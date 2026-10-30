@@ -1,0 +1,21 @@
+# =============================================================================
+# KOMOREBI SMP — consola local de Paper (FIFO, sin red)
+# Managed by KOMOREBI SMP installer v@@INSTALLER_VERSION@@
+#
+# El servicio recibe este FIFO como entrada estándar. Solo root puede
+# escribir en él (modo 0600). Uso: sudo console-komorebi.sh "list"
+# =============================================================================
+[Unit]
+Description=KOMOREBI SMP - consola local (FIFO)
+
+[Socket]
+ListenFIFO=@@CONSOLE_FIFO@@
+Service=@@SERVICE_UNIT@@
+SocketUser=root
+SocketGroup=root
+SocketMode=0600
+DirectoryMode=0750
+RemoveOnStop=yes
+
+[Install]
+WantedBy=sockets.target

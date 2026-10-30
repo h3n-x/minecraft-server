@@ -1,0 +1,78 @@
+# =============================================================================
+# KOMOREBI SMP (木漏れ日) — Paper @@MC_VERSION@@ build @@PAPER_BUILD@@
+# Managed by KOMOREBI SMP installer v@@INSTALLER_VERSION@@
+#
+# No edites este fichero: se regenera con
+#   sudo bash installer/install-komorebi.sh --service
+# Para ajustes locales usa un drop-in:  sudo systemctl edit @@SERVICE_UNIT@@
+# =============================================================================
+[Unit]
+Description=KOMOREBI SMP - Minecraft Paper @@MC_VERSION@@
+Documentation=https://docs.papermc.io/paper/
+Wants=network-online.target
+After=network-online.target @@SOCKET_UNIT@@
+Requires=@@SOCKET_UNIT@@
+# Tras 3 fallos en 10 minutos la unidad queda en "failed" (registrado en el
+# journal) en lugar de reiniciarse indefinidamente.
+StartLimitIntervalSec=600
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=@@MC_USER@@
+Group=@@MC_GROUP@@
+WorkingDirectory=@@MC_DIR@@
+UMask=0027
+
+# Consola local sin red: stdin = FIFO del socket (solo root puede escribir).
+# StandardOutput debe ser explícito; si no, systemd heredaría el FIFO.
+Sockets=@@SOCKET_UNIT@@
+StandardInput=socket
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=komorebi
+
+# Salvaguardas: Java presente, JAR presente y EULA aceptado explícitamente.
+ExecStartPre=/usr/bin/test -x @@JAVA_BIN@@
+ExecStartPre=/usr/bin/test -r @@MC_DIR@@/paper.jar
+ExecStartPre=/usr/bin/grep -qx eula=true @@MC_DIR@@/eula.txt
+ExecStart=@@JAVA_BIN@@ -Xms@@JVM_XMS@@ -Xmx@@JVM_XMX@@ @@JVM_FLAGS@@ -jar paper.jar --nogui
+
+# Parada ordenada: SIGTERM hace que Paper guarde los mundos y salga (código
+# 143). El SIGKILL de systemd solo actúa si se agota TimeoutStopSec.
+KillSignal=SIGTERM
+TimeoutStopSec=@@STOP_TIMEOUT@@
+SuccessExitStatus=0 143
+Restart=on-failure
+RestartSec=20
+
+# Recursos: heap + margen para metaspace, JIT, hilos y red.
+MemoryMax=@@MEMORY_MAX@@
+TasksMax=1024
+LimitNOFILE=65536
+
+# Endurecimiento. MemoryDenyWriteExecute NO se usa: rompe el compilador JIT.
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=@@MC_DIR@@
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+
+[Install]
+WantedBy=multi-user.target
