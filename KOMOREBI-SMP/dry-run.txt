@@ -1,0 +1,282 @@
+ _  __  ___   __  __   ___   ___  ___  ___  ___
+| |/ / / _ \ |  \/  | / _ \ | _ \| __|| _ )|_ _|
+| ' < | (_) || |\/| || (_) ||   /| _| | _ \ | |
+|_|\_\ \___/ |_|  |_| \___/ |_|_\|___||___/|___|
+=================================================
+  KOMOREBI SMP 木漏れ日 SERVER
+  Arch Linux Minecraft Server Installer  v1.1.0
+  Paper 1.20.1 · Java 21 · systemd
+=================================================
+  MODO SIMULACIÓN: no se modificará el sistema.
+
+━━ Comprobaciones del sistema 
+[ OK ] Sistema operativo: Arch Linux
+[ OK ] Arquitectura: x86_64
+[ OK ] Privilegios de administrador (sudo, usuario h3n)
+[ OK ] Gestor de paquetes: pacman 7.1.0.r9.g54d9411-3
+[ OK ] systemd: running
+[ OK ] Conexión HTTPS con fill.papermc.io
+[ OK ] Conexión HTTPS con archlinux.org
+[ OK ] Espacio libre en /var/lib: 434109 MiB
+[INFO] Los backups se guardarán en el mismo disco que el servidor.
+[ OK ] RAM total: 15805 MiB (disponible 15169 MiB) → heap recomendado -Xms2G -Xmx4G
+[INFO] Swap configurada: 20479 MiB (el instalador no modifica swap, zram ni sysctl).
+[ OK ] CPU: Intel(R) Core(TM) i3-10110U CPU @ 2.10GHz (4 hilos)
+[INFO] Coincide con un Intel Core i3 de 10.ª generación.
+[INFO] No hay ningún Java instalado en /usr/lib/jvm.
+[INFO] Java 21 no está en /usr/lib/jvm/java-21-openjdk/bin/java: se instalará jre21-openjdk-headless.
+[ OK ] Puerto TCP 25565 libre o usado por KOMOREBI.
+[INFO] Laptop detectada. logind: HandleLidSwitch=suspend HandleLidSwitchExternalPower=? IdleAction=ignore
+[INFO] Resultado: 0 fallos críticos, 2 avisos.
+
+━━ Informe de hardware 
+       Kernel: Linux 7.2.11-zen1-1-zen x86_64
+[INFO] CPU (lscpu):
+       CPU(s):                                  4
+       Model name:                              Intel(R) Core(TM) i3-10110U CPU @ 2.10GHz
+       Thread(s) per core:                      2
+       Core(s) per socket:                      2
+       CPU(s) scaling MHz:                      54%
+       CPU max MHz:                             4100.0000
+       Virtualization:                          VT-x
+[INFO] Memoria (free -h):
+                      total        used        free      shared  buff/cache   available
+       Mem:            15Gi       636Mi        14Gi       1.8Mi       413Mi        14Gi
+       Swap:           19Gi          0B        19Gi
+[INFO] Discos (lsblk; ROTA=0 indica SSD):
+       NAME      SIZE ROTA TYPE TRAN MODEL
+       zram0       4G    0 disk      
+       nvme0n1 476.9G    0 disk nvme MTFDKBA512QFM-1BD1AABHA
+[INFO] Espacio (df -h):
+       Filesystem      Size  Used Avail Use% Mounted on
+       /dev/nvme0n1p3  451G  3.8G  424G   1% /
+       /dev/nvme0n1p3  451G  3.8G  424G   1% /
+[INFO] Red (ip -br addr):
+       lo               UNKNOWN        127.0.0.1/8 ::1/128 
+       eno1             DOWN           
+       wlan0            UP             192.168.80.27/24 fe80::b8b0:5058:f555:9efc/64 
+       docker0          DOWN           172.17.0.1/16 
+       Batería BAT0: 100% (Full)
+       Tapa: state:      open
+
+━━ Dependencias del sistema (pacman) 
+[INFO] Paquetes que faltan: jre21-openjdk-headless
+
+  Arch Linux no admite actualizaciones parciales: para instalar estos paquetes
+  hay que actualizar TODO el sistema en la misma operación (pacman -Syu),
+  incluido el kernel si hay versión nueva (en ese caso habrá que reiniciar).
+
+  Recomendado si la laptop lleva tiempo sin actualizarse:
+    1. Cancela aquí (respuesta por defecto: no).
+    2. Ejecuta tú:  sudo pacman -Syu   y reinicia si se actualizó el kernel.
+       Si falla por firmas PGP:  sudo pacman -Sy archlinux-keyring && sudo pacman -Su
+    3. Vuelve a lanzar el instalador.
+  No interrumpas pacman (Ctrl+C) mientras instala: podría dejar el sistema a medias.
+
+[SIM ] Se preguntaría si actualizar todo el sistema (respuesta por defecto: no). Si se acepta:
+[SIM ] pacman -Syu --needed jre21-openjdk-headless
+
+━━ Usuario del servicio: minecraft 
+[SIM ] useradd --system --user-group --home-dir /var/lib/minecraft --no-create-home --shell /usr/bin/nologin --comment KOMOREBI\ SMP\ Minecraft\ server minecraft
+[ OK ] Usuario de sistema minecraft creado (sin shell, sin sudo, hogar /var/lib/minecraft).
+
+━━ Directorios y permisos 
+[SIM ] install -d -o minecraft -g minecraft -m 0750 -- /var/lib/minecraft
+[SIM ] install -d -o minecraft -g minecraft -m 0750 -- /var/lib/minecraft/plugins
+[SIM ] install -d -o minecraft -g minecraft -m 0750 -- /var/lib/minecraft/config
+[SIM ] install -d -o root -g root -m 0750 -- /var/backups/minecraft
+[SIM ] install -d -o root -g root -m 0750 -- /var/backups/minecraft/daily
+[SIM ] install -d -o root -g root -m 0750 -- /var/backups/minecraft/weekly
+[SIM ] install -d -o root -g root -m 0750 -- /var/backups/minecraft/manual
+[SIM ] install -d -o root -g root -m 0700 -- /var/backups/minecraft/installer
+[SIM ] install -d -o root -g root -m 0755 -- /etc/komorebi
+[SIM ] install -d -o root -g root -m 0750 -- /var/log/komorebi
+[ OK ] Estructura de directorios correcta.
+
+━━ Configuración de KOMOREBI (/etc/komorebi/komorebi.conf) 
+[SIM ] instalar /etc/komorebi/komorebi.conf (root:root 0644)
+[ OK ] Configuración komorebi.conf instalado: /etc/komorebi/komorebi.conf
+
+━━ Java 21 
+[SIM ] Tras instalar jre21-openjdk-headless se verificaría /usr/lib/jvm/java-21-openjdk/bin/java.
+
+━━ PaperMC 1.20.1 
+[ OK ] Paper 1.20.1 build 196 (STABLE): paper-1.20.1-196.jar, 42MiB
+       sha256 234a9b32098100c6fc116664d64e36ccdb58b5b649af0f80bcccb08b0255eaea
+[SIM ] descargar https://fill-data.papermc.io/v1/objects/234a9b32098100c6fc116664d64e36ccdb58b5b649af0f80bcccb08b0255eaea/paper-1.20.1-196.jar
+[SIM ] verificar tamaño (43230582 bytes), SHA-256 y firma ZIP; instalar en /var/lib/minecraft/paper.jar (minecraft:minecraft 0640)
+[SIM ] instalar /var/lib/minecraft/eula.txt (minecraft:minecraft 0640)
+[ OK ] eula.txt creado con eula=false.
+
+━━ server.properties 
+[SIM ] escribir /var/lib/minecraft/server.properties con: motd=\u00A7d\u6728\u6F0F\u308C\u65E5 \u00A7f| \u00A7aKOMOREBI SMP server-port=25565 online-mode=true white-list=true enforce-whitelist=true max-players=10 view-distance=7 simulation-distance=5 spawn-protection=16 difficulty=normal gamemode=survival pvp=true allow-flight=false enable-command-block=false enable-rcon=false enable-query=false
+
+━━ Plugins (Paper 1.20.1) 
+[SIM ] Paper aún no está instalado; en una ejecución real se instalaría antes.
+[SIM ] install -d -o minecraft -g minecraft -m 0750 -- /var/lib/minecraft/plugins
+[SIM ] instalar /etc/komorebi/plugins-manifest.conf (root:root 0644)
+[ OK ] Manifiesto de plugins instalado: /etc/komorebi/plugins-manifest.conf
+[INFO] Manifiesto: /home/h3n/minecraft-server/KOMOREBI-SMP/config/plugins-manifest.example
+[SIM ] descargar https://cdn.modrinth.com/data/Vebnzrzj/versions/b0mk8uS6/LuckPerms-Bukkit-5.5.71.jar → /var/lib/minecraft/plugins/LuckPerms-Bukkit-5.5.71.jar y verificar sha512
+[SIM ] descargar https://cdn.modrinth.com/data/hXiIvTyT/versions/puUfqBpY/EssentialsX-2.20.1.jar → /var/lib/minecraft/plugins/EssentialsX-2.20.1.jar y verificar sha512
+[SIM ] descargar https://cdn.modrinth.com/data/hXiIvTyT/versions/puUfqBpY/EssentialsXSpawn-2.20.1.jar → /var/lib/minecraft/plugins/EssentialsXSpawn-2.20.1.jar y verificar sha512
+[SIM ] descargar https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar → /var/lib/minecraft/plugins/Vault-1.7.3.jar y verificar sha512
+[SIM ] descargar https://cdn.modrinth.com/data/Lu3KuzdV/versions/llmrc4cl/CoreProtect-22.4.jar → /var/lib/minecraft/plugins/CoreProtect-22.4.jar y verificar sha512
+[SIM ] descargar https://cdn.modrinth.com/data/O4o4mKaq/versions/RQv9pNC6/GriefPrevention.jar → /var/lib/minecraft/plugins/GriefPrevention-16.18.3.jar y verificar sha512
+[SIM ] descargar https://cdn.modrinth.com/data/1u6JkXh5/versions/XL2dgNKo/worldedit-bukkit-7.2.15.jar → /var/lib/minecraft/plugins/worldedit-bukkit-7.2.15.jar y verificar sha512
+[SIM ] descargar https://cdn.modrinth.com/data/DKY9btbd/versions/NpagB1YQ/worldguard-bukkit-7.0.9-dist.jar → /var/lib/minecraft/plugins/worldguard-bukkit-7.0.9-dist.jar y verificar sha512
+[INFO] Informe de plugins:
+       PLUGIN             VERSIÓN   ESTADO     RESULTADO
+       LuckPerms          5.5.71     confirmed  SE INSTALARÍA
+       EssentialsX        2.20.1     confirmed  SE INSTALARÍA
+       EssentialsXSpawn   2.20.1     confirmed  SE INSTALARÍA
+       Vault              1.7.3      confirmed  SE INSTALARÍA
+       CoreProtect        22.4       confirmed  SE INSTALARÍA
+       GriefPrevention    16.18.3    confirmed  SE INSTALARÍA
+       WorldEdit          7.2.15     confirmed  SE INSTALARÍA
+       WorldGuard         7.0.9      confirmed  SE INSTALARÍA
+       PlaceholderAPI     2.11.6     optional   DESACTIVADO (activar en el manifiesto)
+       EssentialsXChat    2.20.1     optional   DESACTIVADO (activar en el manifiesto)
+       spark              -          pending    PENDIENTE DE VALIDACIÓN
+
+━━ Scripts de administración 
+[SIM ] install -d -o root -g root -m 0755 -- /usr/local/lib/komorebi
+[SIM ] instalar /usr/local/lib/komorebi/komorebi-common.sh (root:root 0644)
+[SIM ] instalar /usr/local/lib/komorebi/start-komorebi.sh (root:root 0755)
+[SIM ] instalar /usr/local/lib/komorebi/stop-komorebi.sh (root:root 0755)
+[SIM ] instalar /usr/local/lib/komorebi/status-komorebi.sh (root:root 0755)
+[SIM ] instalar /usr/local/lib/komorebi/backup-komorebi.sh (root:root 0755)
+[SIM ] instalar /usr/local/lib/komorebi/restore-komorebi.sh (root:root 0755)
+[SIM ] instalar /usr/local/lib/komorebi/healthcheck-komorebi.sh (root:root 0755)
+[SIM ] instalar /usr/local/lib/komorebi/console-komorebi.sh (root:root 0755)
+[SIM ] ln -s -- /usr/local/lib/komorebi/start-komorebi.sh /usr/local/sbin/start-komorebi.sh
+[SIM ] ln -s -- /usr/local/lib/komorebi/stop-komorebi.sh /usr/local/sbin/stop-komorebi.sh
+[SIM ] ln -s -- /usr/local/lib/komorebi/status-komorebi.sh /usr/local/sbin/status-komorebi.sh
+[SIM ] ln -s -- /usr/local/lib/komorebi/backup-komorebi.sh /usr/local/sbin/backup-komorebi.sh
+[SIM ] ln -s -- /usr/local/lib/komorebi/restore-komorebi.sh /usr/local/sbin/restore-komorebi.sh
+[SIM ] ln -s -- /usr/local/lib/komorebi/healthcheck-komorebi.sh /usr/local/sbin/healthcheck-komorebi.sh
+[SIM ] ln -s -- /usr/local/lib/komorebi/console-komorebi.sh /usr/local/sbin/console-komorebi.sh
+[ OK ] Scripts disponibles en /usr/local/sbin: start-komorebi.sh stop-komorebi.sh status-komorebi.sh backup-komorebi.sh restore-komorebi.sh healthcheck-komorebi.sh console-komorebi.sh
+
+━━ Servicio systemd (komorebi.service) 
+[INFO] Java: /usr/lib/jvm/java-21-openjdk/bin/java · heap -Xms2G -Xmx4G · MemoryMax=6144M · TimeoutStopSec=180s
+[SIM ] instalar /etc/systemd/system/komorebi-console.socket (root:root 0644)
+[ OK ] Unidad komorebi-console.socket instalado: /etc/systemd/system/komorebi-console.socket
+[SIM ] instalar /etc/systemd/system/komorebi.service (root:root 0644)
+[ OK ] Unidad komorebi.service instalado: /etc/systemd/system/komorebi.service
+[SIM ] systemctl daemon-reload
+[SIM ] systemctl enable -- komorebi-console.socket
+[INFO] Revisión de seguridad opcional: systemd-analyze security komorebi.service
+
+━━ Copias de seguridad programadas 
+[INFO] Programación BACKUP_ONCALENDAR='*-*-* 04:30:00':
+           Next elapse: Sat 2026-10-31 04:30:00 -05
+[SIM ] instalar /etc/systemd/system/komorebi-backup.service (root:root 0644)
+[ OK ] Unidad komorebi-backup.service instalado: /etc/systemd/system/komorebi-backup.service
+[SIM ] instalar /etc/systemd/system/komorebi-backup.timer (root:root 0644)
+[ OK ] Unidad komorebi-backup.timer instalado: /etc/systemd/system/komorebi-backup.timer
+[SIM ] systemctl daemon-reload
+[INFO] Modo de backup: stop · retención diaria=7 semanal=4 manual=0 (0 = sin límite)
+[SIM ] ¿Activar las copias de seguridad diarias automáticas (*-*-* 04:30:00)? [S/n] -> respuesta por defecto: sí
+[SIM ] systemctl enable --now -- komorebi-backup.timer
+
+━━ EULA de Minecraft 
+
+  Para ejecutar un servidor de Minecraft debes aceptar el Contrato de Licencia
+  de Usuario Final (EULA) de Minecraft de Mojang/Microsoft.
+
+    Texto completo:          https://aka.ms/MinecraftEULA
+    Directrices de uso:      https://www.minecraft.net/usage-guidelines
+
+  Este instalador no puede aceptarlo por ti ni resumirlo con valor legal.
+  Léelo completo antes de continuar (presta atención a las condiciones sobre
+  monetización de servidores, ya que KOMOREBI contempla donaciones y rangos).
+
+[SIM ] ¿Has leído el EULA de Minecraft y aceptas sus condiciones? (requiere escribir 'ACEPTO'; se omite en simulación)
+[INFO] EULA no aceptado: el servicio no arrancará (ExecStartPre lo impide).
+
+━━ Primer arranque 
+[INFO] El EULA no está aceptado: el servidor no se inicia.
+
+━━ Configuraciones opcionales 
+[SIM ] ¿Revisar el cortafuegos ahora? [s/N] -> respuesta por defecto: no
+[SIM ] ¿Configurar SSH para administración en la LAN ahora? [s/N] -> respuesta por defecto: no
+[SIM ] ¿Revisar la suspensión de la laptop ahora? [s/N] -> respuesta por defecto: no
+
+━━ Acceso desde Internet (guía; no se modifica el router) 
+  1. Prueba primero en la LAN: en Minecraft, conecta a 192.168.80.27:25565.
+  2. Reserva la IP local de este equipo en el router (DHCP estático).
+  3. CGNAT: compara la IP WAN que muestra el router con tu IP pública. Si son
+     distintas, o la WAN está en 100.64.0.0/10, estás detrás de CGNAT y el port
+     forwarding no funcionará: pide una IP pública a tu operador o usa una VPN/túnel.
+  4. Port forwarding MANUAL en el router: TCP 25565 → 192.168.80.27:25565.
+     Solo ese puerto. Nunca el 22 (SSH).
+  5. Mantén white-list=true hasta decidir la apertura pública.
+
+━━ Resumen 
+Cambios realizados (simulados):
+  + Paquetes (si se acepta la actualización completa): jre21-openjdk-headless
+  + Usuario de sistema creado: minecraft
+  + Directorio creado: /var/lib/minecraft (minecraft:minecraft 0750)
+  + Directorio creado: /var/lib/minecraft/plugins (minecraft:minecraft 0750)
+  + Directorio creado: /var/lib/minecraft/config (minecraft:minecraft 0750)
+  + Directorio creado: /var/backups/minecraft (root:root 0750)
+  + Directorio creado: /var/backups/minecraft/daily (root:root 0750)
+  + Directorio creado: /var/backups/minecraft/weekly (root:root 0750)
+  + Directorio creado: /var/backups/minecraft/manual (root:root 0750)
+  + Directorio creado: /var/backups/minecraft/installer (root:root 0700)
+  + Directorio creado: /etc/komorebi (root:root 0755)
+  + Directorio creado: /var/log/komorebi (root:root 0750)
+  + Configuración komorebi.conf: /etc/komorebi/komorebi.conf
+  + Paper 1.20.1 build 196 → /var/lib/minecraft/paper.jar
+  + eula.txt creado (eula=false)
+  + server.properties configurado
+  + Directorio creado: /var/lib/minecraft/plugins (minecraft:minecraft 0750)
+  + Manifiesto de plugins: /etc/komorebi/plugins-manifest.conf
+  + Plugin LuckPerms 5.5.71
+  + Plugin EssentialsX 2.20.1
+  + Plugin EssentialsXSpawn 2.20.1
+  + Plugin Vault 1.7.3
+  + Plugin CoreProtect 22.4
+  + Plugin GriefPrevention 16.18.3
+  + Plugin WorldEdit 7.2.15
+  + Plugin WorldGuard 7.0.9
+  + Directorio creado: /usr/local/lib/komorebi (root:root 0755)
+  + Script instalado: /usr/local/lib/komorebi/komorebi-common.sh
+  + Script instalado: /usr/local/lib/komorebi/start-komorebi.sh
+  + Script instalado: /usr/local/lib/komorebi/stop-komorebi.sh
+  + Script instalado: /usr/local/lib/komorebi/status-komorebi.sh
+  + Script instalado: /usr/local/lib/komorebi/backup-komorebi.sh
+  + Script instalado: /usr/local/lib/komorebi/restore-komorebi.sh
+  + Script instalado: /usr/local/lib/komorebi/healthcheck-komorebi.sh
+  + Script instalado: /usr/local/lib/komorebi/console-komorebi.sh
+  + Enlace: /usr/local/sbin/start-komorebi.sh
+  + Enlace: /usr/local/sbin/stop-komorebi.sh
+  + Enlace: /usr/local/sbin/status-komorebi.sh
+  + Enlace: /usr/local/sbin/backup-komorebi.sh
+  + Enlace: /usr/local/sbin/restore-komorebi.sh
+  + Enlace: /usr/local/sbin/healthcheck-komorebi.sh
+  + Enlace: /usr/local/sbin/console-komorebi.sh
+  + Unidad komorebi-console.socket: /etc/systemd/system/komorebi-console.socket
+  + Unidad komorebi.service: /etc/systemd/system/komorebi.service
+  + Unidad habilitada al arranque: komorebi-console.socket
+  + Unidad komorebi-backup.service: /etc/systemd/system/komorebi-backup.service
+  + Unidad komorebi-backup.timer: /etc/systemd/system/komorebi-backup.timer
+  + Backups diarios activados (komorebi-backup.timer)
+Avisos:
+  ! Red Wi-Fi (wlan0, IP 192.168.80.27): más latencia y posibles cortes. Se recomienda Ethernet.
+  ! La laptop puede suspenderse (tapa o inactividad) y detener el servidor.
+  ! PaperMC marca 1.20.1 como UNSUPPORTED: no recibirá más parches de seguridad. Planifica una migración futura.
+Acciones manuales pendientes:
+  > Programar copias externas (USB/NAS) de /var/backups/minecraft: el mismo SSD no protege ante su fallo.
+  > Reservar en el router la IP local 192.168.80.27 para este equipo (DHCP estático).
+  > Revisar la suspensión de la laptop: sudo bash installer/install-komorebi.sh --power
+  > Opcional: indica un contacto (correo o URL) en HTTP_CONTACT de /etc/komorebi/komorebi.conf; PaperMC lo pide en el User-Agent.
+  > Leer y aceptar el EULA de Minecraft: sudo bash installer/install-komorebi.sh --eula
+  > Plugin pendiente: spark — Solo se distribuye para Bukkit en el CI oficial (ci.lucko.me) sin checksum ni declaración por build para 1.20.1. Descárgalo manualmente, verifica y añade url/hash para activarlo. (https://spark.lucko.me/download)
+  > Primer arranque: revisar 'journalctl -u komorebi.service' por errores de plugins y configurar LuckPerms, EssentialsX (moneda ¥), GriefPrevention y WorldGuard.
+  > Probar una restauración: sudo backup-komorebi.sh && sudo restore-komorebi.sh --list
+  > Leer y aceptar el EULA de Minecraft: sudo bash installer/install-komorebi.sh --eula
+  > Cortafuegos: sudo bash installer/install-komorebi.sh --firewall
+  > SSH: sudo bash installer/install-komorebi.sh --ssh
+  > Comprobar CGNAT y, si procede, configurar manualmente el port forwarding TCP 25565 en el router.
